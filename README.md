@@ -1,6 +1,6 @@
-# pvs-studio-eclipse-examples
+# Examples of PVS-Studio integration with Eclipse
 This repository contains examples of integrating the analysis with PVS-Studio into Eclipse CDT and displaying the analyzer messages as warnings in IDE output window.
 
 You can use PVS-Studio compiler monitoring (pvs-studio-analzyer) to trace compiler invocations from Eclipse CDT and run PVS-Studio analysis without modifying your build system. PVS-Studio log conversion tool (plog-converter) can be used to convert analyzer report to errorfile format, that is supported by Eclipse - this way analyzer messages can be displayed as warnings in the *Problems* Eclipse output window.
 
-The **eclipse-pvs** script contains all steps required to run the analysis and display analyzer results in Eclipse. This script can either be used as an external build step, or to replace the main build script. To test integration of PVS-Studio report with Eclipse, open the example-1 project in Eclipse CDT and build this project. The analysis results will be displayed in the *Problems* window.
+The **eclipse-pvs** script contains all steps required to run the analysis and display analyzer results in Eclipse. This script can either be used as an external build step, or to replace the project's main build command. To test integration of PVS-Studio report with Eclipse, open the example-1 project in Eclipse CDT and build this project. The analysis results will be displayed in the *Problems* window.
