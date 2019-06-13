@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# without arguments, the script is called as External Tool,
+# and we need to call 'make clean' forcedly:
+if [ -z "$1" ]; then
+    make -f makefile clean
+fi
+
+# calling from the builder, checking the targets:
+if [ "$2" = "clean" ]; then
+    make -f makefile clean
+   # we're done here:
+    exit
+fi
+
+# no 'clean' or the script is called as External Tool - 
+# start analysis:
+TEMPLOG="$PWD/tempfile"
+
+# cleaning up leftovers of 'strace' that may appear in certain cases: 
+pvs-studio-analyzer trace -- make -f makefile all 2>&1 \
+    | sed '/strace: umovestr:/d' -
+pvs-studio-analyzer analyze -o "$TEMPLOG"
+
+RC=$(plog-converter -t errorfile "$TEMPLOG" \
+    | sed '/The documentation for all/d' -)
+rm -f "$TEMPLOG"
+echo "$RC" 
